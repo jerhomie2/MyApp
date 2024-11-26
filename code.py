@@ -23,7 +23,7 @@ with tab2:
     input_gender = st.radio('Gender', ['Male','Female'])
     df1 = df[df['Gender'] == input_gender].copy()
     avg_sleep_duration = df1.groupby(['Gender','Age', 'BMI Category'])['Sleep Duration'].mean().reset_index()
-    fig1 = px.line(avg_sleep_duration, x='Age', y='Sleep Duration', title='Average Sleep Duration by Gender', color = 'BMI Category', barmode='group')
+    fig1 = px.line(avg_sleep_duration, x='Age', y='Sleep Duration', title='Average Sleep Duration by Gender', color = 'BMI Category')
     st.plotly_chart(fig1)
 
 with tab3:
