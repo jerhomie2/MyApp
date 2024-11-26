@@ -44,7 +44,7 @@ with tab2:
 
 with tab3:
     with st.expander('See Description'):
-        st.write('')
+        st.write('This line graph shows the change in sleep duration as daily steps increase, colored by gender and grouped by the sleep disorder you choose.')
     df1 = df[df['Sleep Disorder'] == input_disorder].copy()
     avg_sleep_duration = df1.groupby(['Sleep Disorder','Daily Steps', 'Gender'])['Sleep Duration'].mean().reset_index()
     fig1 = px.line(avg_sleep_duration, x='Daily Steps', y='Sleep Duration', title='Average Sleep Duration by Disorder', color = 'Gender')
