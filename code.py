@@ -15,12 +15,12 @@ tab1, tab2 = st.tabs(['Age','Gender'])
 with tab1:
     input_age = st.slider('Age', min_value=27, max_value=59, value=40)
     df1 = df[df['Age'] == input_age].copy()
-    average_sleep_duration = df1['Sleep Duration'].mean()
+    sleep_duration = df1['Sleep Duration']
     bar_data = pd.DataFrame({
         'Age': [input_age],
-        'Average Sleep Duration': [average_sleep_duration]
+        'Average Sleep Duration': [sleep_duration]
     })
-    fig1 = px.bar(df, x='Age', y='Average Sleep Duration', title='Average Sleep Duration by Age')
+    fig1 = px.bar(bar_data, x='Age', y='Average Sleep Duration', title='Average Sleep Duration by Age')
     st.plotly_chart(fig1)
 
 with tab2:
