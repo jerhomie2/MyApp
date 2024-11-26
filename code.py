@@ -14,13 +14,9 @@ st.title('Sleep Data')
 tab1, tab2 = st.tabs(['Age','Gender'])
 with tab1:
     input_age = st.slider('Age', min_value=27, max_value=59, value=(40,50))
-    df1 = df[df['Age'] == input_age].copy()
-    sleep_duration = df1['Sleep Duration']
-    bar_data = pd.DataFrame({
-        'Age': [input_age],
-        'Sleep Duration': [sleep_duration]
-    })
-    fig1 = px.bar(bar_data, x='Age', y='Sleep Duration', title='Sleep Duration by Age')
+    df1 = df[(df['Age'] >= input_age[0]) & (df['Age'] <= input_age[1])].copy()
+    avg_sleep_duration = df1.groupby('Age')['Sleep Duration'].mean().reset_index()
+    fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Age')
     st.plotly_chart(fig1)
 
 with tab2:
