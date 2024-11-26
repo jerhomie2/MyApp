@@ -35,13 +35,17 @@ with tab1:
     st.plotly_chart(fig1)
 
 with tab2:
+    with st.expander('See Description'):
+        st.write('This line graph shows the change in average sleep duration with age separated by BMI Category and filtered to the gender you choose')
     df1 = df[df['Gender'] == input_gender].copy()
     avg_sleep_duration = df1.groupby(['Gender','Age', 'BMI Category'])['Sleep Duration'].mean().reset_index()
     fig1 = px.line(avg_sleep_duration, x='Age', y='Sleep Duration', title='Average Sleep Duration by Gender and BMI Category', color = 'BMI Category')
     st.plotly_chart(fig1)
 
 with tab3:
+    with st.expander('See Description'):
+        st.write('')
     df1 = df[df['Sleep Disorder'] == input_disorder].copy()
-    avg_sleep_duration = df1.groupby(['Sleep Disorder','Age', 'Gender'])['Sleep Duration'].mean().reset_index()
-    fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Average Sleep Duration by Disorder', color = 'Gender', barmode='group')
+    avg_sleep_duration = df1.groupby(['Sleep Disorder','Daily Steps', 'Gender'])['Sleep Duration'].mean().reset_index()
+    fig1 = px.line(avg_sleep_duration, x='Daily Steps', y='Sleep Duration', title='Average Sleep Duration by Disorder', color = 'Gender')
     st.plotly_chart(fig1)
