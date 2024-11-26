@@ -13,14 +13,15 @@ st.title('Sleep Data')
 
 tab1, tab2 = st.tabs(['Age','Gender'])
 with tab1:
-    input_age = st.slider('Age', min_value=27, max_value=59, value=(40,50))
+    input_age = st.slider('Age Range', min_value=27, max_value=59, value=(40,50))
     df1 = df[(df['Age'] >= input_age[0]) & (df['Age'] <= input_age[1])].copy()
     avg_sleep_duration = df1.groupby('Age')['Sleep Duration'].mean().reset_index()
     fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Age')
     st.plotly_chart(fig1)
 
 with tab2:
-    st.header("Demographic Overview")
-    gender_count = df['Gender'].value_counts()
-    fig2 = px.pie(names=gender_count.index, values=gender_count.values, title="Gender Distribution")
-    st.plotly_chart(fig2)
+    input_gender = st.radio('Gender', ['Male','Female'])
+    df1 = df[df['Gender'] == input_gender].copy()
+    avg_sleep_duration = df1.groupby('Gender','Age')['Sleep Duration'].mean().reset_index()
+    fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Gender')
+    st.plotly_chart(fig1)
