@@ -27,7 +27,7 @@ with tab2:
     st.plotly_chart(fig1)
 
 with tab3:
-    input_gender = st.radio('Disorder', ['Sleep Apnia','Insomnia', 'None'])
+    input_gender = st.radio('Disorder', ['Sleep Apnea','Insomnia', 'None'])
     df1 = df[df['Sleep Disorder'] == input_gender].copy()
     avg_sleep_duration = df1.groupby('Sleep Disorder','Age')['Sleep Duration'].mean().reset_index()
     fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Disorder')
