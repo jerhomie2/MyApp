@@ -11,7 +11,7 @@ df = pd.read_csv('sleep.csv')
 
 st.title('Sleep Data')
 
-tab1, tab2 = st.tabs(['Age','Gender'])
+tab1, tab2, tab3 = st.tabs(['Age','Gender','Sleep Disorder'])
 with tab1:
     input_age = st.slider('Age Range', min_value=27, max_value=59, value=(40,50))
     df1 = df[(df['Age'] >= input_age[0]) & (df['Age'] <= input_age[1])].copy()
@@ -24,4 +24,11 @@ with tab2:
     df1 = df[df['Gender'] == input_gender].copy()
     avg_sleep_duration = df1.groupby(['Gender','Age'])['Sleep Duration'].mean().reset_index()
     fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Gender')
+    st.plotly_chart(fig1)
+
+with tab3:
+    input_gender = st.radio('Disorder', ['Sleep Apnia','Insomnia', 'None'])
+    df1 = df[df['Sleep Disorder'] == input_gender].copy()
+    avg_sleep_duration = df1.groupby('Sleep Disorder','Age')['Sleep Duration'].mean().reset_index()
+    fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Sleep Duration by Disorder')
     st.plotly_chart(fig1)
