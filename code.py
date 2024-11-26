@@ -13,7 +13,6 @@ st.title('Sleep Data')
 
 with st.sidebar:
     input_age = st.slider('Age Range', min_value=27, max_value=59, value=(40,50))
-    input_disorder = st.radio('Disorder', ['Sleep Apnea','Insomnia', 'None '])
     st.text('Gender')
     male_button = st.button('Male')
     female_button = st.button('Female')
@@ -24,6 +23,7 @@ with st.sidebar:
     else:
         input_gender = None  # No gender selected yet
     st.write(f"Selected Gender: {input_gender}")
+    input_disorder = st.radio('Disorder', ['Sleep Apnea','Insomnia', 'None '])
 
 tab1, tab2, tab3 = st.tabs(['Age','Gender','Sleep Disorder'])
 with tab1:
