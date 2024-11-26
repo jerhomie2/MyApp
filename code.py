@@ -27,6 +27,8 @@ with st.sidebar:
 
 tab1, tab2, tab3 = st.tabs(['Age','Gender','Sleep Disorder'])
 with tab1:
+    with st.expander('See Description'):
+        st.write('This bar chart shows the average sleep duration of each age within the age range you choose')
     df1 = df[(df['Age'] >= input_age[0]) & (df['Age'] <= input_age[1])].copy()
     avg_sleep_duration = df1.groupby('Age')['Sleep Duration'].mean().reset_index()
     fig1 = px.bar(avg_sleep_duration, x='Age', y='Sleep Duration', title='Average Sleep Duration by Age')
